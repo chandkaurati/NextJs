@@ -7,7 +7,6 @@ export async function POST(request:Request) {
      await dbConnect()
 
      try {
-
        const {username, email, password}    = await request.json()
        const existingUserVerifiedByUsername = await UserModel.findOne({
         username,
@@ -32,7 +31,6 @@ export async function POST(request:Request) {
             existingUserByEmail.verifyCode = verifyCode
             existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 360000)
             existingUserByEmail.save()
-
           }
        }else{
          const hashedPassword =  await bcrypt.hash(password, 10)
